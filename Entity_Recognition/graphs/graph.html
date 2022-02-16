@@ -1,0 +1,123 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>Graph :)</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 50%;
+            height: 400px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Tug crews", "label": "Tug crews", "shape": "dot", "size": 10}, {"id": "their ban", "label": "their ban", "shape": "dot", "size": 10}, {"id": "foreign-flag ships", "label": "foreign-flag ships", "shape": "dot", "size": 10}, {"id": "containers", "label": "containers", "shape": "dot", "size": 10}, {"id": "New South Wales ports", "label": "New South Wales ports", "shape": "dot", "size": 10}, {"id": "a separate dispute", "label": "a separate dispute", "shape": "dot", "size": 10}, {"id": "shipping sources", "label": "shipping sources", "shape": "dot", "size": 10}, {"id": "The ban", "label": "The ban", "shape": "dot", "size": 10}, {"id": "a week ago", "label": "a week ago", "shape": "dot", "size": 10}, {"id": "the movement", "label": "the movement", "shape": "dot", "size": 10}, {"id": "The pay dispute", "label": "The pay dispute", "shape": "dot", "size": 10}, {"id": "a hearing", "label": "a hearing", "shape": "dot", "size": 10}, {"id": "disruption", "label": "disruption", "shape": "dot", "size": 10}, {"id": "today", "label": "today", "shape": "dot", "size": 10}, {"id": "The industrial action", "label": "The industrial action", "shape": "dot", "size": 10}, {"id": "part", "label": "part", "shape": "dot", "size": 10}, {"id": "action", "label": "action", "shape": "dot", "size": 10}, {"id": "the New South Wales Trades", "label": "the New South Wales Trades", "shape": "dot", "size": 10}, {"id": "the various port unions", "label": "the various port unions", "shape": "dot", "size": 10}, {"id": "it", "label": "it", "shape": "dot", "size": 10}, {"id": "shipping movements", "label": "shipping movements", "shape": "dot", "size": 10}, {"id": "handling", "label": "handling", "shape": "dot", "size": 10}, {"id": "affected", "label": "affected", "shape": "dot", "size": 10}, {"id": "they", "label": "they", "shape": "dot", "size": 10}, {"id": "the disruption", "label": "the disruption", "shape": "dot", "size": 10}, {"id": "on", "label": "on", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Tug crews", "relation": "lifted", "to": "their ban", "weight": 1}, {"from": "foreign-flag ships", "relation": "carrying", "to": "containers", "weight": 1}, {"from": "New South Wales ports", "relation": "disrupted by", "to": "a separate dispute", "weight": 1}, {"from": "shipping sources", "relation": "said", "to": "Tug crews", "weight": 1}, {"from": "The ban", "relation": "imposed", "to": "a week ago", "weight": 1}, {"from": "The ban", "relation": "prevented", "to": "the movement", "weight": 1}, {"from": "The pay dispute", "relation": "went before", "to": "a hearing", "weight": 1}, {"from": "disruption", "relation": "began", "to": "today", "weight": 1}, {"from": "The industrial action", "relation": "is", "to": "part", "weight": 1}, {"from": "action", "relation": "called by", "to": "the New South Wales Trades", "weight": 1}, {"from": "the various port unions", "relation": "appear", "to": "it", "weight": 1}, {"from": "it", "relation": "have on", "to": "shipping movements", "weight": 1}, {"from": "handling", "relation": "disrupted", "to": "affected", "weight": 1}, {"from": "they", "relation": "say", "to": "the disruption", "weight": 1}, {"from": "the disruption", "relation": "go", "to": "on", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
